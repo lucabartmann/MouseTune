@@ -9,6 +9,7 @@ disabled_rules:
   - cyclomatic_complexity
   - file_length
   - nesting
+  - trailing_comma
 opt_in_rules:
   - empty_count
   - sorted_imports

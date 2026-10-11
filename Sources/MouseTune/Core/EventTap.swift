@@ -1,5 +1,5 @@
-import Cocoa
 import ApplicationServices
+import Cocoa
 
 final class EventTapManager {
     static let shared = EventTapManager()

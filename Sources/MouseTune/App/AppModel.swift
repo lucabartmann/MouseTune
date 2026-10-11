@@ -1,6 +1,6 @@
+import ApplicationServices
 import Cocoa
 import Combine
-import ApplicationServices
 
 final class AppModel: ObservableObject {
     static let shared = AppModel()
