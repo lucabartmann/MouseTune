@@ -1,4 +1,8 @@
-# MouseTune
+<p align="center">
+  <img src="Resources/AppIcon.png" width="128" alt="MouseTune icon">
+</p>
+
+<h1 align="center">MouseTune</h1>
 
 Eine kleine, native Menüleisten-App für macOS, die jeder Maus die wichtigsten Funktionen von Logitech Options+ gibt — ohne Logitech-Software, Abhängigkeiten, Netzwerkzugriff oder Telemetrie.
 
