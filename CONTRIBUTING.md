@@ -16,7 +16,7 @@ swift build && swift test   # or open MouseTune.xcodeproj in Xcode
 
 ## Adding a language
 1. Add a case to `Language` in `Sources/MouseTune/Localization/Language.swift` (with its native name and resolution rule).
-2. Copy `Strings+en.swift` to `Strings+xx.swift`, translate every value, and register the table in `Strings.table(for:)` / `Strings.text`.
+2. Copy `Strings+en.swift` to `Strings+xx.swift`, translate every value, and register the table in `Strings.table(for:)`; also add its flag to `Language.flag`.
 3. `swift test` fails if a key is missing or a `%` placeholder doesn't match.
 
 ## Pull requests

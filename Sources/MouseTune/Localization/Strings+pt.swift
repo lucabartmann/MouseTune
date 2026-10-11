@@ -67,7 +67,7 @@ extension Strings {
         .obPermGranted: "Acesso concedido",
         .obPermWaiting: "A aguardar autorização…",
         .obGrant: "Permitir acesso…",
-        .obSetupTitle: "Faça seu",
+        .obSetupTitle: "Torne-o seu",
         .obSetupBody: "Escolha como a roda do rato se desloca e uma cor de destaque. Tudo pode ser alterado mais tarde.",
         .obReadyTitle: "Tudo pronto",
         .obReadyBody: "O MouseTune vive na barra de menus. Clique a qualquer momento no ícone do rato no topo do ecrã para ajustar o ponteiro, o deslocamento e os botões.",
