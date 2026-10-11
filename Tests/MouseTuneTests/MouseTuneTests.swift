@@ -1,5 +1,5 @@
-import XCTest
 @testable import MouseTune
+import XCTest
 
 final class ConfigTests: XCTestCase {
     func testEmptyJSONDecodesToDefaults() throws {
