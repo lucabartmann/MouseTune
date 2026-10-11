@@ -112,3 +112,19 @@ struct DirectionPicker: View {
 func systemScrollIsNatural() -> Bool {
     (UserDefaults.standard.object(forKey: "com.apple.swipescrolldirection") as? Bool) ?? true
 }
+
+/// The real app icon when running from the built bundle; falls back to the themed glyph
+/// (e.g. when launched via `swift run`, where no icon is bundled).
+struct AppIconView: View {
+    var size: CGFloat = 96
+
+    var body: some View {
+        if Bundle.main.object(forInfoDictionaryKey: "CFBundleIconFile") != nil {
+            Image(nsImage: NSApp.applicationIconImage)
+                .resizable()
+                .frame(width: size, height: size)
+        } else {
+            AppGlyph(size: size * 0.82)
+        }
+    }
+}

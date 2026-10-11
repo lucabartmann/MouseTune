@@ -40,7 +40,7 @@ struct OnboardingView: View {
     private var welcome: some View {
         VStack(spacing: 16) {
             Spacer()
-            AppGlyph(size: 84)
+            AppIconView(size: 104)
             Text(model.t(.obWelcomeTitle)).font(.system(size: 26, weight: .bold, design: .rounded))
             Text(model.t(.obWelcomeBody)).multilineTextAlignment(.center).foregroundStyle(.secondary)
             Spacer().frame(height: 6)

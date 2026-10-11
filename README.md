@@ -1,4 +1,8 @@
-# MouseTune
+<p align="center">
+  <img src="Resources/AppIcon.png" width="128" alt="MouseTune icon">
+</p>
+
+<h1 align="center">MouseTune</h1>
 
 A tiny, native menu bar app for macOS that gives any mouse the essentials of Logitech Options+ — without Logitech software, dependencies, network access or telemetry.
 
@@ -54,6 +58,7 @@ Sources/MouseTune
 ├── Localization/   string tables (add a language here)
 └── UI/             menu popover, onboarding, shared theme
 Tests/MouseTuneTests
+Resources/          app icon (regenerate with scripts/make-icon.sh)
 ```
 
 ## Releasing

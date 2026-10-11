@@ -3,6 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleIdentifier</key><string>local.MouseTune</string>
+    <key>CFBundleIconFile</key><string>AppIcon</string>
     <key>CFBundleName</key><string>MouseTune</string>
     <key>CFBundleDisplayName</key><string>MouseTune</string>
     <key>CFBundleExecutable</key><string>MouseTune</string>
