@@ -1,6 +1,6 @@
 import Foundation
 
-/// Every user-visible string. Tables live in `Strings+en.swift` / `Strings+de.swift`;
+/// Every user-visible string. Tables live in `Strings+xx.swift`;
 /// the unit tests make sure each table covers every case.
 enum L10n: String, CaseIterable {
     case tabControls, tabSettings, statusActive, statusInactive
@@ -26,11 +26,20 @@ enum L10n: String, CaseIterable {
 
 enum Strings {
     static func text(_ key: L10n, _ language: Language) -> String {
-        let table = language.resolved == .de ? de : en
-        return table[key] ?? en[key] ?? key.rawValue
+        table(for: language)[key] ?? en[key] ?? key.rawValue
     }
 
     static func table(for language: Language) -> [L10n: String] {
-        language.resolved == .de ? de : en
+        switch language.resolved {
+        case .de: return de
+        case .fr: return fr
+        case .es: return es
+        case .pt: return pt
+        case .it: return it
+        case .nb: return nb
+        case .sv: return sv
+        case .da: return da
+        case .en, .system: return en
+        }
     }
 }

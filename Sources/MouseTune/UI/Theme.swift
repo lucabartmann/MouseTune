@@ -77,19 +77,29 @@ struct AccentSwatches: View {
 struct LanguageChoice: View {
     @EnvironmentObject var model: AppModel
 
+    private let columns = [GridItem(.adaptive(minimum: 118), spacing: 8)]
+
     var body: some View {
-        HStack(spacing: 8) {
+        LazyVGrid(columns: columns, spacing: 8) {
             ForEach(Language.allCases) { lang in
                 let selected = model.config.language == lang
                 Button { model.config.language = lang } label: {
-                    Text(lang.nativeName ?? model.t(.languageSystem))
-                        .font(.callout.weight(.medium))
-                        .frame(maxWidth: .infinity).padding(.vertical, 9)
-                        .background(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .fill(selected ? model.config.accent.color.opacity(0.18) : Color.primary.opacity(0.05)))
-                        .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
-                            .strokeBorder(selected ? model.config.accent.color : Color.primary.opacity(0.08),
-                                          lineWidth: selected ? 1.5 : 1))
+                    HStack(spacing: 6) {
+                        if let flag = lang.flag {
+                            Text(flag).font(.system(size: 16))
+                        } else {
+                            Image(systemName: "globe").font(.system(size: 14, weight: .medium))
+                        }
+                        Text(lang.nativeName ?? model.t(.languageSystem))
+                            .font(.callout.weight(.medium)).lineLimit(1)
+                    }
+                    .frame(maxWidth: .infinity).padding(.vertical, 8)
+                    .background(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .fill(selected ? model.config.accent.color.opacity(0.18) : Color.primary.opacity(0.05)))
+                    .overlay(RoundedRectangle(cornerRadius: 10, style: .continuous)
+                        .strokeBorder(selected ? model.config.accent.color : Color.primary.opacity(0.08),
+                                      lineWidth: selected ? 1.5 : 1))
+                    .contentShape(Rectangle())
                 }
                 .buttonStyle(.plain)
             }

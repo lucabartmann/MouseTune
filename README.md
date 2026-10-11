@@ -13,7 +13,7 @@ A tiny, native menu bar app for macOS that gives any mouse the essentials of Log
 - **Scroll speed** for the mouse wheel only
 - **Scroll direction** (System / Natural / Classic), independent of the system "Natural scrolling" setting — mouse and trackpad can scroll differently permanently
 - **Button mapping** for buttons 2–7 (middle, back, forward, …): Mission Control, Spaces, copy/paste, media keys, screenshot, and more
-- Guided **onboarding**, **English / Deutsch** UI (switchable in-app), accent colors, launch at login
+- Guided **onboarding**, **9 languages** (English, Deutsch, Français, Español, Português, Italiano, Norsk, Svenska, Dansk; switchable in-app), accent colors, launch at login
 
 Requires macOS 13 or later.
 

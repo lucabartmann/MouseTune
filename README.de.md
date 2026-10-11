@@ -13,7 +13,7 @@ Eine kleine, native Menüleisten-App für macOS, die jeder Maus die wichtigsten 
 - **Scrollgeschwindigkeit** nur für das Mausrad
 - **Scrollrichtung** (System / Natürlich / Klassisch), unabhängig von der Systemeinstellung „Natürliches Scrollen“ — Maus und Trackpad können dauerhaft unterschiedlich scrollen
 - **Tastenbelegung** für die Tasten 2–7 (Mitte, Zurück, Vor, …): Mission Control, Spaces, Kopieren/Einfügen, Medientasten, Bildschirmfoto u. a.
-- Geführtes **Onboarding**, UI auf **Deutsch / English** (in der App umschaltbar), Akzentfarben, Start beim Anmelden
+- Geführtes **Onboarding**, UI in **9 Sprachen** (Deutsch, English, Français, Español, Português, Italiano, Norsk, Svenska, Dansk; in der App umschaltbar), Akzentfarben, Start beim Anmelden
 
 Voraussetzung: macOS 13 oder neuer.
 
