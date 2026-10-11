@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 77;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,16 +12,12 @@
 
 /* Begin PBXFileReference section */
 		B1000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		B1000009 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = AppIcon.icns; path = Resources/AppIcon.icns; sourceTree = "<group>"; };
 		B1000008 /* MouseTune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MouseTune.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1000009 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = AppIcon.icns; path = Resources/AppIcon.icns; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		D1000002 /* MouseTune */ = {
-			isa = PBXFileSystemSynchronizedRootGroup;
-			path = Sources/MouseTune;
-			sourceTree = "<group>";
-		};
+		D1000002 /* Sources/MouseTune */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Sources/MouseTune; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,7 +34,7 @@
 		D1000001 = {
 			isa = PBXGroup;
 			children = (
-				D1000002 /* MouseTune */,
+				D1000002 /* Sources/MouseTune */,
 				B1000007 /* Info.plist */,
 				B1000009 /* AppIcon.icns */,
 				D1000003 /* Products */,
@@ -69,7 +65,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				D1000002 /* MouseTune */,
+				D1000002 /* Sources/MouseTune */,
 			);
 			name = MouseTune;
 			productName = MouseTune;

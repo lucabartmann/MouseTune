@@ -51,7 +51,7 @@ final class ScrollTests: XCTestCase {
 
 final class LocalizationTests: XCTestCase {
     func testEveryLanguageCoversEveryKey() {
-        for lang in [Language.de, .en] {
+        for lang in Language.allCases where lang != .system {
             let table = Strings.table(for: lang)
             for key in L10n.allCases {
                 XCTAssertFalse(table[key, default: ""].isEmpty, "\(lang) is missing \(key)")
@@ -62,7 +62,9 @@ final class LocalizationTests: XCTestCase {
     func testFormatPlaceholdersMatchAcrossLanguages() {
         for key in L10n.allCases {
             let count = { (s: String) in s.components(separatedBy: "%").count }
-            XCTAssertEqual(count(Strings.en[key] ?? ""), count(Strings.de[key] ?? ""), "\(key)")
+            for lang in Language.allCases where lang != .system {
+                XCTAssertEqual(count(Strings.en[key] ?? ""), count(Strings.table(for: lang)[key] ?? ""), "\(lang) \(key)")
+            }
         }
     }
 
