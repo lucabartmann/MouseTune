@@ -6,8 +6,13 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		A1000010 /* AppIcon.icns in Resources */ = {isa = PBXBuildFile; fileRef = B1000009 /* AppIcon.icns */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B1000007 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1000009 /* AppIcon.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = AppIcon.icns; path = Resources/AppIcon.icns; sourceTree = "<group>"; };
 		B1000008 /* MouseTune.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MouseTune.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -35,6 +40,7 @@
 			children = (
 				D1000002 /* MouseTune */,
 				B1000007 /* Info.plist */,
+				B1000009 /* AppIcon.icns */,
 				D1000003 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -56,6 +62,7 @@
 			buildPhases = (
 				C1000002 /* Sources */,
 				C1000001 /* Frameworks */,
+				C1000003 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -97,6 +104,17 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C1000003 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A1000010 /* AppIcon.icns in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		C1000002 /* Sources */ = {

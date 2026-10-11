@@ -54,6 +54,7 @@ Sources/MouseTune
 ├── Localization/   string tables (add a language here)
 └── UI/             menu popover, onboarding, shared theme
 Tests/MouseTuneTests
+Resources/          app icon (regenerate with scripts/make-icon.sh)
 ```
 
 ## Releasing
