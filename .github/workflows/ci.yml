@@ -64,7 +64,7 @@ jobs:
           test "$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' build/MouseTune.app/Contents/Info.plist)" = "true"
       - name: Build via Xcode project
         run: xcodebuild -project MouseTune.xcodeproj -scheme MouseTune -configuration Release CODE_SIGNING_ALLOWED=NO build
-      - uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v7
         with:
           name: MouseTune-ci-${{ github.sha }}
           path: build/MouseTune.zip
