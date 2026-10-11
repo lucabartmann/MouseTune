@@ -5,6 +5,7 @@
       "release-type": "simple",
       "package-name": "MouseTune",
       "changelog-path": "CHANGELOG.md",
+      "include-component-in-tag": false,
       "include-v-in-tag": true,
       "bump-minor-pre-major": false
     }
