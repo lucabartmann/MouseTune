@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/lucabartmann/MouseTune/compare/v1.1.0...v1.2.0) (2026-10-11)
+
+
+### Features
+
+* add 7 languages and flag-based language picker ([#12](https://github.com/lucabartmann/MouseTune/issues/12)) ([787ecc2](https://github.com/lucabartmann/MouseTune/commit/787ecc242ddb0293043a8a160ed30970c2449ba7))
+
 ## [1.1.0](https://github.com/lucabartmann/MouseTune/compare/v1.0.0...v1.1.0) (2026-10-11)
 
 
