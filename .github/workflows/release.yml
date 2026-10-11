@@ -1,0 +1,87 @@
+name: Release
+
+# Trunk-based flow: every merge to main updates a "release PR" (release-please) that
+# bumps version.txt + CHANGELOG.md from Conventional Commits. Merging that PR tags
+# vX.Y.Z, and this workflow builds the app and attaches the artifacts.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Existing tag to (re)build and upload artifacts for, e.g. v1.2.3"
+        required: true
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  release-please:
+    name: Release PR / tag
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    outputs:
+      released: ${{ steps.rp.outputs.release_created }}
+      tag: ${{ steps.rp.outputs.tag_name }}
+    steps:
+      - id: rp
+        uses: googleapis/release-please-action@v4
+        with:
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json
+
+  publish:
+    name: Build and publish
+    needs: release-please
+    if: always() && (needs.release-please.outputs.released == 'true' || github.event_name == 'workflow_dispatch')
+    runs-on: macos-latest
+    permissions:
+      contents: write
+    env:
+      TAG: ${{ needs.release-please.outputs.tag || inputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ env.TAG }}
+
+      - name: Test
+        run: swift test
+
+      - name: Build app
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+        run: |
+          VERSION="${TAG#v}" ./build.sh
+          codesign --verify --deep --strict build/MouseTune.app
+
+      - name: Package (zip, dmg, checksums)
+        run: scripts/package.sh "${TAG#v}"
+
+      - name: Upload to GitHub Release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$TAG" build/dist/* --clobber
+
+      - name: Update Homebrew tap
+        env:
+          TAP_TOKEN: ${{ secrets.HOMEBREW_TAP_TOKEN }}
+        run: |
+          if [[ -z "$TAP_TOKEN" ]]; then echo "HOMEBREW_TAP_TOKEN not set, skipping tap update"; exit 0; fi
+          VERSION="${TAG#v}"
+          SHA="$(awk -v f="MouseTune-$VERSION.zip" '$2==f {print $1}' build/dist/SHA256SUMS)"
+          git clone "https://x-access-token:${TAP_TOKEN}@github.com/${{ github.repository_owner }}/homebrew-tap.git" "$RUNNER_TEMP/tap"
+          mkdir -p "$RUNNER_TEMP/tap/Casks"
+          scripts/generate-cask.sh "$VERSION" "$SHA" > "$RUNNER_TEMP/tap/Casks/mousetune.rb"
+          cd "$RUNNER_TEMP/tap"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add Casks/mousetune.rb
+          if ! git diff --cached --quiet; then git commit -m "mousetune $VERSION" && git push; fi

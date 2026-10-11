@@ -1,0 +1,79 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Cancel superseded runs on the same branch/PR.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  pr-title:
+    name: PR title (Conventional Commits)
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: read
+    steps:
+      - uses: amannn/action-semantic-pull-request@v5
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  lint:
+    name: SwiftLint
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: swiftlint --strict
+
+  test:
+    name: Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-14, macos-15]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: .build
+          key: spm-${{ matrix.os }}-${{ hashFiles('Package.swift') }}
+      - run: swift test
+
+  build:
+    name: Build app + Xcode project
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build bundle
+        run: ./build.sh --zip
+        env:
+          BUILD_NUMBER: ${{ github.run_number }}
+      - name: Verify bundle
+        run: |
+          codesign --verify --deep --strict build/MouseTune.app
+          test "$(/usr/libexec/PlistBuddy -c 'Print :LSUIElement' build/MouseTune.app/Contents/Info.plist)" = "true"
+      - name: Build via Xcode project
+        run: xcodebuild -project MouseTune.xcodeproj -scheme MouseTune -configuration Release CODE_SIGNING_ALLOWED=NO build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: MouseTune-ci-${{ github.sha }}
+          path: build/MouseTune.zip
+          retention-days: 7
+
+  # Single required check for branch protection.
+  ci-ok:
+    name: CI OK
+    if: always()
+    needs: [lint, test, build]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          [[ "${{ contains(needs.*.result, 'failure') || contains(needs.*.result, 'cancelled') }}" == "false" ]]
